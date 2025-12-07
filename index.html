@@ -3,426 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Pebble</title>
+    <title>Pebble - Privacy & Terms</title>
     <style>
-        * {
+        :root {
+            --primary-color: #000000;
+            --accent-color: #007AFF;
+            --bg-color: #F5F5F7;
+            --text-color: #1D1D1F;
+            --section-bg: #FFFFFF;
+            --gray-text: #86868b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-            min-height: 100vh;
-        }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 20px;
         }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        
-        .logo {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        
-        h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
-        
-        .subtitle {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        h2 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 16px;
+
+        /* --- 语言切换按钮 (Language Toggle) --- */
+        .lang-toggle-container {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
-        
-        h2 .icon {
-            font-size: 24px;
+
+        .lang-toggle {
+            background-color: #E5E5EA;
+            border-radius: 100px;
+            padding: 4px;
+            display: flex;
+            position: relative;
+            width: 200px;
+            height: 36px;
         }
-        
-        h3 {
-            font-size: 16px;
+
+        .lang-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            z-index: 2;
+            font-size: 14px;
             font-weight: 600;
-            color: #444;
-            margin: 20px 0 12px 0;
-        }
-        
-        p {
-            color: #555;
-            margin-bottom: 12px;
-        }
-        
-        ul {
-            margin-left: 20px;
-            margin-bottom: 16px;
-        }
-        
-        li {
-            color: #555;
-            margin-bottom: 8px;
-        }
-        
-        .highlight-box {
-            background: #f0f7ff;
-            border-left: 4px solid #007AFF;
-            padding: 16px 20px;
-            border-radius: 0 12px 12px 0;
-            margin: 16px 0;
-        }
-        
-        .highlight-box.warning {
-            background: #fff5f5;
-            border-left-color: #ff3b30;
-        }
-        
-        .highlight-box.success {
-            background: #f0fff4;
-            border-left-color: #34c759;
-        }
-        
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 16px 0;
-        }
-        
-        .data-table th,
-        .data-table td {
-            padding: 12px 16px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .data-table th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .data-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .badge.required {
-            background: #fff0f0;
-            color: #ff3b30;
-        }
-        
-        .badge.optional {
-            background: #f0f7ff;
-            color: #007AFF;
-        }
-        
-        .contact-info {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 24px;
+            color: var(--gray-text);
+            cursor: pointer;
+            transition: color 0.3s ease;
             text-align: center;
+            line-height: 36px;
+            padding: 0;
         }
-        
-        .contact-info h3 {
-            color: white;
-            margin-bottom: 8px;
+
+        .lang-btn.active {
+            color: var(--primary-color);
         }
-        
-        .contact-info a {
-            color: white;
-            text-decoration: underline;
+
+        .slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            height: 36px;
+            background-color: white;
+            border-radius: 100px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 1;
         }
+
+        .lang-toggle[data-active="zh"] .slider {
+            transform: translateX(100%);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: var(--gray-text);
+            font-size: 1.1em;
+        }
+
+        /* --- 页面标签 (Page Tabs) --- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #E5E5EA;
+            padding-bottom: 15px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            color: var(--gray-text);
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* --- Content --- */
+        .content-wrapper {
+            background: var(--section-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            min-height: 400px;
+        }
+
+        .content-section {
+            display: none; 
+            animation: fadeIn 0.4s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { font-size: 1.5em; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        h3 { font-size: 1.2em; margin-top: 25px; color: var(--accent-color); }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
         
         .footer {
             text-align: center;
-            padding: 32px;
-            color: #999;
-            font-size: 14px;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: var(--gray-text);
         }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 24px 16px;
-            }
-            
-            .card {
-                padding: 24px 20px;
-            }
-            
-            h1 {
-                font-size: 26px;
-            }
-            
-            .data-table th,
-            .data-table td {
-                padding: 10px 12px;
-                font-size: 14px;
-            }
+
+        .warning-box {
+            background-color: #FFF5F5;
+            border-left: 4px solid #FF3B30;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
         }
+
+        a { color: var(--accent-color); text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">🪨</div>
-            <h1>Privacy Policy</h1>
-            <p class="subtitle">Last Updated: December 2, 2024</p>
-        </div>
-        
-        <!-- Introduction -->
-        <div class="card">
-            <h2><span class="icon">👋</span> Introduction</h2>
-            <p>
-                Welcome to <strong>Pebble</strong> ("we," "our," or "us"). We are committed to protecting your privacy 
-                and ensuring you have a positive experience using our location-based social app.
-            </p>
-            <p>
-                This Privacy Policy explains what information we collect, how we use it, and your rights 
-                regarding your personal data. By using Pebble, you agree to the practices described in this policy.
-            </p>
-            <div class="highlight-box success">
-                <strong>Our Commitment:</strong> We collect only what's necessary to provide our services, 
-                and we never sell your personal data to third parties.
-            </div>
-        </div>
-        
-        <!-- Information We Collect -->
-        <div class="card">
-            <h2><span class="icon">📋</span> Information We Collect</h2>
-            
-            <h3>1. Account Information</h3>
-            <table class="data-table">
-                <tr>
-                    <th>Data</th>
-                    <th>Purpose</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>Email Address</td>
-                    <td>Account creation & authentication</td>
-                    <td><span class="badge required">Required</span></td>
-                </tr>
-                <tr>
-                    <td>Display Name</td>
-                    <td>Shown on your profile and posts</td>
-                    <td><span class="badge required">Required</span></td>
-                </tr>
-                <tr>
-                    <td>Username (@handle)</td>
-                    <td>Unique identifier for your account</td>
-                    <td><span class="badge required">Required</span></td>
-                </tr>
-                <tr>
-                    <td>University/School</td>
-                    <td>Community verification</td>
-                    <td><span class="badge required">Required</span></td>
-                </tr>
-                <tr>
-                    <td>Profile Photo</td>
-                    <td>Personalize your profile</td>
-                    <td><span class="badge optional">Optional</span></td>
-                </tr>
-                <tr>
-                    <td>Bio</td>
-                    <td>Tell others about yourself</td>
-                    <td><span class="badge optional">Optional</span></td>
-                </tr>
-            </table>
-            
-            <h3>2. Location Data</h3>
-            <p>
-                Pebble is a location-based app. We collect your location data to:
-            </p>
-            <ul>
-                <li>Show nearby posts ("Drops") on the map</li>
-                <li>Allow you to post content at specific locations</li>
-                <li>Calculate distances to nearby content</li>
-                <li>Display your position on the map (visible only to you)</li>
-            </ul>
-            <div class="highlight-box warning">
-                <strong>Important:</strong> Your exact location is never shared with other users. 
-                Only the location of your posts is visible to others.
-            </div>
-            
-            <h3>3. User-Generated Content</h3>
-            <ul>
-                <li><strong>Posts (Drops):</strong> Text content, images, categories, and location</li>
-                <li><strong>Interactions:</strong> Likes, bookmarks, and follows</li>
-                <li><strong>Reports:</strong> Content you report for policy violations</li>
-            </ul>
-            
-            <h3>4. Device Permissions</h3>
-            <table class="data-table">
-                <tr>
-                    <th>Permission</th>
-                    <th>Why We Need It</th>
-                </tr>
-                <tr>
-                    <td>📍 Location</td>
-                    <td>Core functionality - showing and creating location-based posts</td>
-                </tr>
-                <tr>
-                    <td>📷 Camera</td>
-                    <td>Taking photos for posts (only when you choose to)</td>
-                </tr>
-                <tr>
-                    <td>🖼️ Photo Library</td>
-                    <td>Selecting existing photos for posts and profile</td>
-                </tr>
-            </table>
-        </div>
-        
-        <!-- How We Use Your Information -->
-        <div class="card">
-            <h2><span class="icon">⚙️</span> How We Use Your Information</h2>
-            <ul>
-                <li><strong>Provide Services:</strong> Display posts on the map, manage your account, enable social features</li>
-                <li><strong>Improve Experience:</strong> Personalize content, optimize app performance</li>
-                <li><strong>Safety & Security:</strong> Detect fraud, enforce community guidelines, respond to reports</li>
-                <li><strong>Communications:</strong> Send important updates about your account or our services</li>
-            </ul>
-        </div>
-        
-        <!-- Data Storage & Security -->
-        <div class="card">
-            <h2><span class="icon">🔒</span> Data Storage & Security</h2>
-            <p>
-                We use <strong>Firebase</strong> (by Google) to securely store your data:
-            </p>
-            <ul>
-                <li><strong>Firebase Authentication:</strong> Secure login and account management</li>
-                <li><strong>Cloud Firestore:</strong> Encrypted database for user data and posts</li>
-                <li><strong>Cloud Storage:</strong> Secure storage for images and media</li>
-            </ul>
-            <div class="highlight-box">
-                All data is transmitted using industry-standard TLS/SSL encryption and stored 
-                in secure, access-controlled environments.
-            </div>
-        </div>
-        
-        <!-- Data Sharing -->
-        <div class="card">
-            <h2><span class="icon">🤝</span> Data Sharing</h2>
-            <h3>What We Share Publicly</h3>
-            <ul>
-                <li>Your display name, username, and profile photo</li>
-                <li>Posts you create (including their location)</li>
-                <li>Your follower/following counts</li>
-            </ul>
-            
-            <h3>What We Never Share</h3>
-            <ul>
-                <li>Your email address</li>
-                <li>Your real-time location</li>
-                <li>Your bookmarked posts</li>
-                <li>Users you've blocked</li>
-            </ul>
-            
-            <div class="highlight-box success">
-                <strong>No Data Sales:</strong> We do not sell, rent, or trade your personal information 
-                to third parties for marketing purposes. Ever.
-            </div>
-        </div>
-        
-        <!-- Your Rights -->
-        <div class="card">
-            <h2><span class="icon">✨</span> Your Rights & Controls</h2>
-            <p>You have full control over your data:</p>
-            <ul>
-                <li><strong>Access:</strong> View all your account information in Settings</li>
-                <li><strong>Edit:</strong> Update your profile information anytime</li>
-                <li><strong>Delete Posts:</strong> Remove any post you've created</li>
-                <li><strong>Block Users:</strong> Prevent specific users from seeing your content</li>
-                <li><strong>Delete Account:</strong> Permanently delete your account and all associated data</li>
-            </ul>
-            <div class="highlight-box">
-                To delete your account, go to <strong>Settings → Delete Account</strong>. 
-                This action is irreversible and will remove all your data from our servers.
-            </div>
-        </div>
-        
-        <!-- Data Retention -->
-        <div class="card">
-            <h2><span class="icon">🗓️</span> Data Retention</h2>
-            <ul>
-                <li><strong>Active Accounts:</strong> Data retained while your account is active</li>
-                <li><strong>Deleted Accounts:</strong> All data permanently deleted within 30 days</li>
-                <li><strong>Posts:</strong> Deleted immediately when you remove them</li>
-                <li><strong>Reports:</strong> Retained for safety purposes, even after account deletion</li>
-            </ul>
-        </div>
-        
-        <!-- Children's Privacy -->
-        <div class="card">
-            <h2><span class="icon">👶</span> Children's Privacy</h2>
-            <p>
-                Pebble is not intended for children under 13 years of age. We do not knowingly collect 
-                personal information from children under 13. If you believe we have collected information 
-                from a child under 13, please contact us immediately.
-            </p>
-        </div>
-        
-        <!-- Changes to Policy -->
-        <div class="card">
-            <h2><span class="icon">📝</span> Changes to This Policy</h2>
-            <p>
-                We may update this Privacy Policy from time to time. We will notify you of any significant 
-                changes by posting a notice in the app or sending you an email. Your continued use of Pebble 
-                after changes constitutes acceptance of the updated policy.
-            </p>
-        </div>
-        
-        <!-- Contact -->
-        <div class="card">
-            <h2><span class="icon">📬</span> Contact Us</h2>
-            <div class="contact-info">
-                <h3>Questions or Concerns?</h3>
-                <p>We're here to help. Reach out to us at:</p>
-                <p><a href="mailto:privacy@pebbleapp.com">privacy@pebbleapp.com</a></p>
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <p>© 2024 Pebble. All rights reserved.</p>
-            <p>Made with 🪨 for the community</p>
+
+<div class="container">
+    
+    <div class="lang-toggle-container">
+        <div class="lang-toggle" id="langToggle" data-active="en">
+            <div class="slider"></div>
+            <button class="lang-btn active" onclick="switchLang('en')">English</button>
+            <button class="lang-btn" onclick="switchLang('zh')">中文</button>
         </div>
     </div>
+
+    <header>
+        <h1>Pebble</h1>
+        <p class="subtitle" id="subtitle">Your Campus Radar</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" id="tab-privacy" onclick="switchTab('privacy')">Privacy Policy</button>
+        <button class="tab-btn" id="tab-terms" onclick="switchTab('terms')">Terms of Service</button>
+    </div>
+
+    <div class="content-wrapper">
+        
+        <div id="privacy-en" class="content-section active">
+            <h2>Privacy Policy</h2>
+            <p><strong>Last Updated: December 8, 2025</strong></p>
+            <p>Welcome to Pebble. This Privacy Policy explains how we collect and use your information.</p>
+
+            <h3>1. Information We Collect</h3>
+            <ul>
+                <li><strong>Identity Data:</strong> University email (.ac.uk), username, user handle, and profile picture.</li>
+                <li><strong>Location Data:</strong> Precise location data to enable map functionalities, nearby posts, and friend location sharing.</li>
+                <li><strong>Content Data:</strong> The "Pebbles" (posts) you create, including text and images.</li>
+            </ul>
+
+            <h3>2. How We Use Your Information</h3>
+            <ul>
+                <li>To verify your university student status.</li>
+                <li>To show "Pebbles" posted near your location.</li>
+                <li>To facilitate social interactions like finding friends and sharing live location (if enabled).</li>
+            </ul>
+
+            <h3>3. Third Party Services</h3>
+            <p>We use <strong>Google Firebase</strong> for secure authentication and data storage.</p>
+
+            <h3>4. Contact Us</h3>
+            <p>If you have questions, contact us at: <a href="mailto:me@wangyinghao.com">me@wangyinghao.com</a></p>
+        </div>
+
+        <div id="terms-en" class="content-section">
+            <h2>Terms of Service</h2>
+            <p><strong>Last Updated: December 8, 2025</strong></p>
+
+            <h3>1. Acceptance</h3>
+            <p>Access to Pebble is restricted to users with a valid university email address (e.g., ending in .ac.uk).</p>
+
+            <h3>2. Zero Tolerance Policy</h3>
+            <p>To maintain a safe community, we enforce a strict <strong>Zero Tolerance Policy</strong>. The following are strictly prohibited:</p>
+            
+            <div class="warning-box">
+                <strong>Prohibited Activities:</strong>
+                <ul>
+                    <li><strong>Illegal Activities:</strong> Drugs, weapons, violence, or unlawful acts.</li>
+                    <li><strong>Academic Dishonesty:</strong> Ghostwriting, exam cheating aids, or academic fraud.</li>
+                    <li><strong>Spam or Ads:</strong> Commercial advertising or promotions.</li>
+                    <li><strong>NSFW Content:</strong> Nudity, sexual content, or harassment.</li>
+                    <li><strong>Gambling:</strong> Betting or money laundering schemes.</li>
+                </ul>
+            </div>
+
+            <p>Violations will result in immediate content removal and permanent account bans.</p>
+        </div>
+
+
+        <div id="privacy-zh" class="content-section">
+            <h2>隐私政策</h2>
+            <p><strong>最后更新：2025年12月8日</strong></p>
+            <p>欢迎使用 Pebble。本隐私政策旨在说明我们如何收集和使用您的信息。</p>
+
+            <h3>1. 我们收集的信息</h3>
+            <ul>
+                <li><strong>身份数据：</strong> 学校邮箱 (.ac.uk)、用户名、用户 ID (Handle) 和头像。</li>
+                <li><strong>位置数据：</strong> 精确的地理位置数据，用于启用地图功能、显示附近动态以及好友位置共享。</li>
+                <li><strong>内容数据：</strong> 您发布的 "Pebbles"（动态），包括文字、图片及分类信息。</li>
+            </ul>
+
+            <h3>2. 我们如何使用您的信息</h3>
+            <ul>
+                <li>验证您的大学生身份（通过邮箱后缀）。</li>
+                <li>基于位置展示您附近的 "Pebbles" 动态。</li>
+                <li>促进社交互动，例如查找好友和共享实时位置（需您主动开启）。</li>
+            </ul>
+
+            <h3>3. 第三方服务</h3>
+            <p>我们使用 <strong>Google Firebase</strong> 提供安全的身份验证和数据存储服务。</p>
+
+            <h3>4. 联系我们</h3>
+            <p>如有疑问，请联系：<a href="mailto:me@wangyinghao.com">me@wangyinghao.com</a></p>
+        </div>
+
+        <div id="terms-zh" class="content-section">
+            <h2>服务条款 (用户协议)</h2>
+            <p><strong>最后更新：2025年12月8日</strong></p>
+
+            <h3>1. 条款接受</h3>
+            <p>Pebble 仅限拥有有效大学邮箱（如以 .ac.uk 结尾）的用户注册使用。下载或使用本应用即表示您同意本条款。</p>
+
+            <h3>2. 零容忍政策 (Zero Tolerance)</h3>
+            <p>为了维护安全友好的社区环境，我们执行严格的<strong>零容忍政策</strong>。严禁发布以下内容：</p>
+            
+            <div class="warning-box">
+                <strong>禁止行为：</strong>
+                <ul>
+                    <li><strong>违法活动：</strong> 涉及毒品、武器、暴力或任何违法行为的内容。</li>
+                    <li><strong>学术不端：</strong> 代写 (Ghostwriting)、考试作弊辅助或学术欺诈相关内容。</li>
+                    <li><strong>垃圾信息与广告：</strong> 商业广告或推广信息。</li>
+                    <li><strong>不当内容 (NSFW)：</strong> 裸露、色情内容或骚扰行为。</li>
+                    <li><strong>赌博：</strong> 博彩、赌场或洗钱相关内容。</li>
+                </ul>
+            </div>
+
+            <p>违反上述准则将导致内容被立即删除，账号将被永久封禁。</p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        &copy; 2025 Pebble App. All rights reserved.
+    </div>
+</div>
+
+<script>
+    // 状态管理
+    let currentLang = 'en';
+    let currentTab = 'privacy';
+
+    // 翻译字典（用于静态 UI 元素）
+    const translations = {
+        subtitle: {
+            en: 'Your Campus Radar',
+            zh: '你的校园雷达'
+        },
+        tabPrivacy: {
+            en: 'Privacy Policy',
+            zh: '隐私政策'
+        },
+        tabTerms: {
+            en: 'Terms of Service',
+            zh: '服务条款'
+        }
+    };
+
+    function updateView() {
+        // 1. 切换内容显示
+        document.querySelectorAll('.content-section').forEach(el => {
+            el.classList.remove('active');
+        });
+        // 组合 ID: e.g., "privacy-en"
+        const activeId = `${currentTab}-${currentLang}`;
+        const activeEl = document.getElementById(activeId);
+        if (activeEl) activeEl.classList.add('active');
+
+        // 2. 更新静态文本
+        document.getElementById('subtitle').innerText = translations.subtitle[currentLang];
+        document.getElementById('tab-privacy').innerText = translations.tabPrivacy[currentLang];
+        document.getElementById('tab-terms').innerText = translations.tabTerms[currentLang];
+
+        // 3. 更新 Tab 按钮状态
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`tab-${currentTab}`).classList.add('active');
+
+        // 4. 更新语言开关 UI
+        const langToggle = document.getElementById('langToggle');
+        langToggle.setAttribute('data-active', currentLang);
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        // 简单通过文字内容或者顺序来判断 active class，这里直接重新渲染 active
+        const btns = langToggle.querySelectorAll('.lang-btn');
+        if (currentLang === 'en') btns[0].classList.add('active');
+        else btns[1].classList.add('active');
+    }
+
+    function switchLang(lang) {
+        currentLang = lang;
+        updateView();
+    }
+
+    function switchTab(tab) {
+        currentTab = tab;
+        updateView();
+    }
+
+    // 初始化
+    updateView();
+</script>
+
 </body>
 </html>
