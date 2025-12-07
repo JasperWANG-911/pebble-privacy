@@ -94,11 +94,6 @@
             margin-bottom: 5px;
         }
 
-        .subtitle {
-            color: var(--gray-text);
-            font-size: 1.1em;
-        }
-
         /* --- 页面标签 (Page Tabs) --- */
         .tabs {
             display: flex;
@@ -195,8 +190,7 @@
 
     <header>
         <h1>Pebble</h1>
-        <p class="subtitle" id="subtitle">Your Campus Radar</p>
-    </header>
+        </header>
 
     <div class="tabs">
         <button class="tab-btn active" id="tab-privacy" onclick="switchTab('privacy')">Privacy Policy</button>
@@ -228,7 +222,7 @@
             <p>We use <strong>Google Firebase</strong> for secure authentication and data storage.</p>
 
             <h3>4. Contact Us</h3>
-            <p>If you have questions, contact us at: <a href="mailto:me@wangyinghao.com">me@wangyinghao.com</a></p>
+            <p>If you have questions, contact us at: <a href="mailto:support@mypebbles.uk">support@mypebbles.uk</a></p>
         </div>
 
         <div id="terms-en" class="content-section">
@@ -279,7 +273,7 @@
             <p>我们使用 <strong>Google Firebase</strong> 提供安全的身份验证和数据存储服务。</p>
 
             <h3>4. 联系我们</h3>
-            <p>如有疑问，请联系：<a href="mailto:me@wangyinghao.com">me@wangyinghao.com</a></p>
+            <p>如有疑问，请联系：<a href="mailto:support@mypebbles.uk">support@mypebbles.uk</a></p>
         </div>
 
         <div id="terms-zh" class="content-section">
@@ -320,10 +314,6 @@
 
     // 翻译字典（用于静态 UI 元素）
     const translations = {
-        subtitle: {
-            en: 'Your Campus Radar',
-            zh: '你的校园雷达'
-        },
         tabPrivacy: {
             en: 'Privacy Policy',
             zh: '隐私政策'
@@ -345,7 +335,6 @@
         if (activeEl) activeEl.classList.add('active');
 
         // 2. 更新静态文本
-        document.getElementById('subtitle').innerText = translations.subtitle[currentLang];
         document.getElementById('tab-privacy').innerText = translations.tabPrivacy[currentLang];
         document.getElementById('tab-terms').innerText = translations.tabTerms[currentLang];
 
